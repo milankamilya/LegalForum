@@ -1,0 +1,293 @@
+{
+	"info": {
+		"_postman_id": "26453f00-d6f2-403c-937b-8d6318c6c41f",
+		"name": "LegalForum",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "34028166"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Kristie\",\n    \"lastName\": \"Kwak\",\n    \"email\": \"johnsmith@grr.la\",\n    \"password\": \"Password1!\",\n    \"role\": \"normal\",\n    \"language\": \"en\",\n    \"isAnonymous\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}/user/create"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"milankamilya@gmail.com\",\n    \"password\": \"Password1!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}/user/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}/user/logout"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Query",
+			"item": [
+				{
+					"name": "Create Query",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"What are the tax implications of remote work?\",\n    \"detail\": \"I am working remotely for a company in another country. What taxes do I need to pay?\",\n    \"isPrivate\": false,\n    \"tags\": [],\n    \"category\": \"general\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}/query/create"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Query List for public",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"categories\": [\"general\"],\n    \"statuses\": [\"opened\"],\n    \"search\": \"How\",\n    \"page\": 1,\n    \"limit\": 500\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}/query/list/public"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Query List",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"categories\": [\"general\"],\n    \"statuses\": [\"opened\"],\n    \"search\": \"con\",\n    \"page\": 1,\n    \"limit\": 500\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}/query/list"
+					},
+					"response": []
+				},
+				{
+					"name": "Get open query",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"statuses\": [\"opened\"],\n    \"search\": \"con\",\n    \"page\": 1,\n    \"limit\": 500\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}/query/list"
+					},
+					"response": []
+				},
+				{
+					"name": "Get query to answer for panelist",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"statuses\": [\"opened\"],\n    \"search\": \"con\",\n    \"page\": 1,\n    \"limit\": 500\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}/query/list"
+					},
+					"response": []
+				},
+				{
+					"name": "Assign panelist",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"67e03cb233e678881c8223ff\",\n    \"panelist\": \"67e025ec0a99795d8feab0ec\" // kristie\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}/query/assign"
+					},
+					"response": []
+				},
+				{
+					"name": "Answer to query",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"67e03cb233e678881c8223ff\",\n    \"answer\": \"Please elaborate\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}/query/answer"
+					},
+					"response": []
+				},
+				{
+					"name": "Answer to query for public",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"67e03cb233e678881c8223ff\",\n    \"answer\": \"Post as public\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}/query/answer/public"
+					},
+					"response": []
+				},
+				{
+					"name": "Get query by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}/query/67e03cb233e678881c8223ff"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
